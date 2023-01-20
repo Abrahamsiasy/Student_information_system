@@ -8,9 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'student_id';
+    // protected $primaryKey = 'student_id';
 
-    //one student has one medical history 
+    //one student has one medical history
     public function medicalhistories()
     {
         return $this->hasMany(Medicalhistory::class);
@@ -22,8 +22,8 @@ class Student extends Model
     }
 
 
-    
 
-    
+
+
 
 }

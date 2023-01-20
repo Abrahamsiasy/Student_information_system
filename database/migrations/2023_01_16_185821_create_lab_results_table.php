@@ -21,16 +21,16 @@ return new class extends Migration
 
             //lab report foregin id
             $table->unsignedBigInteger('lab_report_id');
-            $table->foreign('lab_report_id')->references('id')->on('lab_results')->onDelete('cascade'); 
+            $table->foreign('lab_report_id')->references('id')->on('lab_results')->onDelete('cascade');
 
 
             //create user_id foreign key
             $table->unsignedBigInteger('lab_assistant_id');
-            $table->foreign('lab_assistant_id')->references('id')->on('users')->onDelete('cascade');   
+            $table->foreign('lab_assistant_id')->references('id')->on('users')->onDelete('cascade');
 
-            $table->string('student_id');
-            $table->foreign('student_id')->references('student_id')->on('students')->onDelete('cascade');
-           
+            $table->unsignedBigInteger('student_id');
+            $table->foreign('student_id')->references('id')->on('students')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

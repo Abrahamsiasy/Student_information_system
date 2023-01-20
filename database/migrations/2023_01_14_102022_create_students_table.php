@@ -14,6 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
+            $table->id();
             $table->string('student_id')->unique();
             $table->string('first_name');
             $table->string('middle_name');
@@ -32,10 +33,10 @@ return new class extends Migration
             $table->string('program');
             //add campas foreign key
             $table->unsignedBigInteger('campas_id');
-            $table->foreign('campas_id')->references('id')->on('campas')->onDelete('cascade');  
-            
+            $table->foreign('campas_id')->references('id')->on('campas')->onDelete('cascade');
+
             $table->unsignedBigInteger('clinic_id')->nullable();
-            $table->foreign('clinic_id')->references('id')->on('clinics')->onDelete('cascade');              
+            $table->foreign('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
             $table->timestamps();
         });
     }

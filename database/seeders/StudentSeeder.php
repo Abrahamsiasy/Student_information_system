@@ -15,5 +15,6 @@ class StudentSeeder extends Seeder
     public function run()
     {
         //
+        \App\Models\Student::factory(200)->create();
     }
 }

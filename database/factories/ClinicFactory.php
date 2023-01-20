@@ -16,8 +16,11 @@ class ClinicFactory extends Factory
      */
     public function definition()
     {
+        static $name = 1;
         return [
             //
+            'campas_id' => $name++,
+            'name' => 'CLINIC_ ' . str_pad($name++, 3, '0', STR_PAD_LEFT),
         ];
     }
 }

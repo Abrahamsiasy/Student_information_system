@@ -23,26 +23,26 @@ class StudentFactory extends Factory
     {
 
         static $studentId = 1;
+        $campus_id = [1,2,3,4,5];
         return [
             'student_id' => 'JU' . $this->faker->randomElement(['R', 'E']) . '/'. str_pad($studentId++, 4, '0', STR_PAD_LEFT) . '/'. $this->faker->numberBetween(2020,2023),
-            'dob' => $this->faker->dateTimeBetween('-60 years', 'now'),
-            // 'dob' =>  $this->faker->date($format = 'D-m-y', $max = 2012 ,$min = 1920 ),
-            'sex' => $this->faker->randomElement(['M', 'F']), 
+
             'first_name' => $this->faker->firstName,
             'middle_name' => $this->faker->lastName,
             'last_name' => $this->faker->lastName,
-            'email' => $this->faker->safeEmail,
+            'dob' => $this->faker->dateTimeBetween('-60 years', 'now'),
+            // 'dob' =>  $this->faker->date($format = 'D-m-y', $max = 2012 ,$min = 1920 ),
+            'sex' => $this->faker->randomElement(['M', 'F']),
+            'join_year' => $this->faker->date,
             'phone_number' => $this->faker->unique()->phoneNumber,
+            'email' => $this->faker->safeEmail,
             'profile' => 'photo.jpg',
             'status' => true,
-            'join_year' => $this->faker->date,
             'passed_semester' => $this->faker->numberBetween(1,10),
             'taken_semester' => $this->faker->numberBetween(1,10),
             'program' => $this->faker->text(10,15),
-            
-
-
-            
+            'campas_id' => $campus_id[array_rand($campus_id)],
+            'clinic_id' => $campus_id[array_rand($campus_id)],
         ];
     }
 }

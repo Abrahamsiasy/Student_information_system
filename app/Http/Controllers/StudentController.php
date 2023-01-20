@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
+use App\Models\Campas;
 use App\Models\Student;
 
 class StudentController extends Controller
@@ -15,8 +16,12 @@ class StudentController extends Controller
      */
     public function index()
     {
-        //
-        return view('student.index');
+        //return  Hash::make(123456789);
+
+        return view('student.index', [
+            'students' => Student::paginate(5),
+            'campas' => Campas::all()
+        ]);
     }
 
     /**

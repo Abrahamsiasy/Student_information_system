@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Queue;
 use App\Http\Requests\StoreQueueRequest;
 use App\Http\Requests\UpdateQueueRequest;
-use App\Models\Queue;
+use App\Models\Room;
 
 class QueueController extends Controller
 {
@@ -16,6 +17,9 @@ class QueueController extends Controller
     public function index()
     {
         //
+        return view('queue.queue', [
+            'queues' => Queue::paginate(25), 'rooms' => Room::first()
+        ]);
     }
 
     /**

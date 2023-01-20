@@ -21,10 +21,10 @@ return new class extends Migration
             $table->string('password');
             //foreign key for table 'clinic'
             //add campas foreign key
-            $table->unsignedBigInteger('campas_id');
-            $table->foreign('campas_id')->references('id')->on('campas')->onDelete('cascade');  
-            
-            $table->unsignedBigInteger('clinic_id')->nullable();
+            $table->unsignedBigInteger('campas_id')->default(1);
+            $table->foreign('campas_id')->references('id')->on('campas')->onDelete('cascade');
+
+            $table->unsignedBigInteger('clinic_id')->default(1);
             $table->foreign('clinic_id')->references('id')->on('clinics')->onDelete('cascade');
             // $table->unsignedBigInteger('room_id')->nullable();
             // $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');

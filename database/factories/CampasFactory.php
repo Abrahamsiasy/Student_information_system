@@ -16,8 +16,11 @@ class CampasFactory extends Factory
      */
     public function definition()
     {
+        static $name = 1;
         return [
             //
+            'name' => 'CAMPASS_' . str_pad($name++, 3, '0', STR_PAD_LEFT),
+
         ];
     }
 }

@@ -15,5 +15,6 @@ class CampasSeeder extends Seeder
     public function run()
     {
         //
+        \App\Models\Campas::factory(5)->create();
     }
 }
