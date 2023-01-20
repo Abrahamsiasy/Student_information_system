@@ -46,7 +46,7 @@ class User extends Authenticatable
     // user belongs to campas 
     public function clinic()
     {
-        return $this->hasMany(Clinic::class);
+        return $this->belongsTo(Clinic::class);
     }
 
     // user has many students
@@ -63,10 +63,24 @@ class User extends Authenticatable
     //user belong to room
     public function room()
     {
-        return $this->belongsTo(Room::class);
+        return $this->hasOne(Room::class);
     }
+    //user belongs to one department
+    public function department()
+    {
+        return $this->belongsTo(Department::class);
+    }
+    //user belongs to one campus
 
+    //student has many MedicalHistory
+    //COULD BE DELETED ???
+    // one medical history could belong to a doctor a lab asssistant or more 
+    // public function medicalHistories()
+    // {
+    //     return $this->hasMany(Medicalhistory::class);
+    // }
 
+    
     
 
 }

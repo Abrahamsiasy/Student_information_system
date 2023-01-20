@@ -10,21 +10,21 @@ class Clinic extends Model
     use HasFactory;
     protected $table = 'clinics';
 
-    protected $fillable = ['clinic_name' , 'campas_id'];
+    protected $fillable = ['name' , 'campas_id'];
 
     // clinic belongs to campas
     public function campas()
     {
-        return $this->belongsTo('App\Models\Campas');
+        return $this->belongsTo(Campas::class);
     }
 
     // clinic has many users
     public function users()
     {
-        return $this->hasMany('App\Models\User');
+        return $this->hasMany(User::class);
     }
 
-    public function room(){
+    public function rooms(){
         return $this->hasMany(Room::class);
     }
 }

@@ -10,7 +10,7 @@ class Campas extends Model
     use HasFactory;
     protected $table = 'campas';
 
-    protected $fillable = ['name' , 'campas_name' , 'campas_id'];
+    protected $fillable = ['name'];
 
     // campas has many clinics 
     public function clinics()

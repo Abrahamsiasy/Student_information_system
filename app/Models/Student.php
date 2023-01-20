@@ -20,6 +20,8 @@ class Student extends Model
     public function campas(){
         return $this->belongsTo(Campas::class);
     }
+
+
     
 
     

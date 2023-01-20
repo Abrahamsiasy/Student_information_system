@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('clinics', function (Blueprint $table) {
             $table->id();
-            $table->string('clinic_name')->nullable()->unique();
+            $table->string('name')->nullable()->unique();
             $table->unsignedBigInteger('campas_id');
             $table->foreign('campas_id')->references('id')->on('campas')->onDelete('cascade');
 

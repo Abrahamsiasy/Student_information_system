@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('dose');
 
             //madication and dose list
-            $table->unsignedBigInteger('medicalhistories_id');
+            $table->unsignedBigInteger('medicalhistories_id')->nullable();
             $table->foreign('medicalhistories_id')->references('id')->on('medicalhistories')->onDelete('cascade');
 
             $table->timestamps();

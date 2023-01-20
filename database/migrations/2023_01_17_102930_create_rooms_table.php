@@ -17,10 +17,13 @@ return new class extends Migration
             $table->id();
             $table->string('room_no');
             $table->string('room_title');
+            $table->string('room_type');//office lab or doctors room 
 
             //foreign id for clinic room belongs to clinc
             $table->unsignedBigInteger('clinic_id');
-            $table->foreign('clinic_id')->references('id')->on('clinic')->onDelete('cascade');   
+            $table->foreign('clinic_id')->references('id')->on('clinics')->onDelete('cascade');   
+            $table->unsignedBigInteger('room_user');
+            $table->foreign('room_user')->references('id')->on('users')->onDelete('cascade');   
 
             $table->timestamps();
         });

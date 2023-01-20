@@ -10,7 +10,7 @@ class Medication extends Model
     use HasFactory;
 
     protected $table = 'medications';
-    protected  $fillable = [ 'name', 'description', 'dose'];
+    protected  $fillable = [ 'name', 'description', 'dose', 'medicalhistories_id'];
 
     //medication belongs to medical history
     public function medical_history(){

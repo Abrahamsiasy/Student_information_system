@@ -31,10 +31,11 @@ return new class extends Migration
             $table->boolean('status');
             $table->string('program');
             //add campas foreign key
-            $table->string('campas_id');
-            $table->foreign('campas_id')->references('student_id')->on('student')->onDelete('cascade');   
-            $table->timestamps();
+            $table->unsignedBigInteger('campas_id');
+            $table->foreign('campas_id')->references('id')->on('campas')->onDelete('cascade');  
             
+            $table->unsignedBigInteger('clinic_id')->nullable();
+            $table->foreign('clinic_id')->references('id')->on('clinics')->onDelete('cascade');              
             $table->timestamps();
         });
     }

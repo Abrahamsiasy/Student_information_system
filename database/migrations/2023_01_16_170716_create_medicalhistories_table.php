@@ -18,18 +18,18 @@ return new class extends Migration
             //foreign key
             //create a realtion with campas table
             //create a relation with studnet table which a studnet would have many records
-            $table->unsignedBigInteger('student_id');
+            $table->string('student_id');
             $table->foreign('student_id')->references('student_id')->on('students')->onDelete('cascade');
-            //create a relation with use table which a user would have many records
-            $table->unsignedBigInteger('doctor_id');
+            //create a relation with user table which a user would have many records
+            $table->unsignedBigInteger('doctor_id')->nullable();
             $table->foreign('doctor_id')->references('id')->on('users')->onDelete('cascade');
-            //create a relation with lab reports
+            //create a relation with lab reports to the lab assistant through users method and the report it self
             $table->unsignedBigInteger('lab_id')->nullable();
             $table->foreign('lab_id')->references('id')->on('labreports')->onDelete('cascade');
             
             //personal medical history
-            $table->unsignedBigInteger('personal_medical_history_id');
-            $table->foreign('personal_medical_history_id')->references('id')->on('personalmedicalhistories')->onDelete('cascade');
+            // $table->unsignedBigInteger('personal_medical_history_id');
+            // $table->foreign('personal_medical_history_id')->references('id')->on('personalmedicalhistories')->onDelete('cascade');
             //personal medical history
             $table->unsignedBigInteger('womens_id')->nullable();
             $table->foreign('womens_id')->references('id')->on('womens')->onDelete('cascade');
