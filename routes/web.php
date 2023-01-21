@@ -52,7 +52,17 @@ Route::controller(DoctorController::class)->group(
         //Route::get('doctor/detail', 'show');
         Route::get('doctor/detail/{student}', 'show');
     },
+);
 
+//Lab Assistant index route
+Route::controller(DoctorController::class)->group(
+    function () {
+        Route::get('lab', 'index');
+        //post lab report
+        Route::post('lab/detail/{student}', 'storeLabReports');
+        //Route::get('doctor/detail', 'show');
+        Route::get('lab/lab/{student}', 'show');
+    },
 );
 
 require __DIR__ . '/auth.php';
