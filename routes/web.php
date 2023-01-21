@@ -5,6 +5,7 @@ use App\Http\Controllers\QueueController;
 use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\LabAssistantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -55,7 +56,7 @@ Route::controller(DoctorController::class)->group(
 );
 
 //Lab Assistant index route
-Route::controller(DoctorController::class)->group(
+Route::controller(LabAssistantController::class)->group(
     function () {
         Route::get('lab', 'index');
         //post lab report
