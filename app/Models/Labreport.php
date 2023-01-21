@@ -11,26 +11,25 @@ class Labreport extends Model
     use HasFactory;
 
     // assign table and column
-    protected $table = 'labreports';
-    protected $primaryKey = 'id';
+    // protected $table = 'labreports';
     protected $fillable = ['title', 'description', 'doctor_id', 'student_id'];
 
     //Labreport belongs to one user
-    public function users()
-    {
-        return $this->belongsTo(User::class);
-    }
+    // public function users()
+    // {
+    //     return $this->belongsTo(User::class);
+    // }
 
-    //lab report has one lab results
-    public function labResult(){
-        return $this->hasOne(LabResult::class);
-    }
+    // //lab report has one lab results
+    // public function labResult(){
+    //     return $this->hasOne(LabResult::class);
+    // }
 
-    //lab report has belongs to patient history
-    public function medicalHistories()
-    {
-        return $this->belongsTo(Medicalhistory::class);
-    }
+    // //lab report has belongs to patient history
+    // public function medicalHistories()
+    // {
+    //     return $this->belongsTo(Medicalhistory::class);
+    // }
 
 
 }

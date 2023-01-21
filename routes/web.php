@@ -47,9 +47,12 @@ Route::controller(QueueController::class)->group(
 Route::controller(DoctorController::class)->group(
     function () {
         Route::get('doctor', 'index');
-        Route::get('doctor/detail', 'show');
+        //post lab report
+        Route::post('doctor/detail/{student}', 'storeLabReports');
+        //Route::get('doctor/detail', 'show');
+        Route::get('doctor/detail/{student}', 'show');
     },
 
 );
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -21,7 +21,7 @@ return new class extends Migration
 
             //lab report foregin id
             $table->unsignedBigInteger('lab_report_id');
-            $table->foreign('lab_report_id')->references('id')->on('lab_results')->onDelete('cascade');
+            $table->foreign('lab_report_id')->references('id')->on('labreports')->onDelete('cascade');
 
 
             //create user_id foreign key
