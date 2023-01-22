@@ -36,12 +36,16 @@ Route::middleware('auth')->group(function () {
 Route::controller(StudentController::class)->group(
     function () {
         Route::get('student', 'index');
+        //add student to que and 
+        Route::get('student/{student}', 'show');
     }
 );
 //queue index routes
 Route::controller(QueueController::class)->group(
     function () {
         Route::get('queue', 'index');
+
+        
     }
 );
 //doctor index route

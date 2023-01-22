@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Campas;
+use App\Models\Queue;
 use App\Models\Student;
 
 class StudentController extends Controller
@@ -19,7 +20,7 @@ class StudentController extends Controller
         //return  Hash::make(123456789);
 
         return view('student.index', [
-            'students' => Student::paginate(5),
+            'students' => Student::paginate(50),
             'campas' => Campas::all()
         ]);
     }
@@ -54,6 +55,15 @@ class StudentController extends Controller
     public function show(Student $student)
     {
         //
+        //dd($student->student_id);
+        $formField['student_id'] = $student->id;
+        Queue::create($formField);
+        dd($student->student_id);
+        //return view students
+        return view('student.index', [
+            'students' => Student::paginate(50),
+            'campas' => Campas::all()
+        ]);
     }
 
     /**

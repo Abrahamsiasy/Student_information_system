@@ -26,16 +26,21 @@
                                                 </th>
                                                 <th scope="col"
                                                     class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
+                                                     ID
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
                                                     STUDENT ID
                                                 </th>
                                                 <th scope="col"
                                                     class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
                                                     STUDENT NAME
                                                 </th>
-                                                <th scope="col"
+                                                {{-- room id is not nedded --}}
+                                                {{-- <th scope="col"
                                                     class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
                                                     ROOM ID
-                                                </th>
+                                                </th> --}}
                                                 <th scope="col"
                                                     class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
                                                     Action
@@ -57,17 +62,29 @@
 
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                        {{ $student->student->id }}
+                                                    </td>
+
+
+                                                    {{-- to be deleted start --}}
+                                                    <td
+                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                         {{ $student->student->student_id }}
                                                     </td>
+                                                    {{-- to be deleted start --}}
+
+
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                         {{ $student->student->first_name }}
                                                     </td>
                                                     </td>
-                                                    <td
+                                                    {{-- room  id is not needed --}}
+                                                    {{-- <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                         {{ $student->student->campas->name }}
-                                                    </td>
+                                                        {{ $student->doctor->room->room_no }}
+                                                    </td> --}}
 
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">

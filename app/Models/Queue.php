@@ -13,7 +13,7 @@ class Queue extends Model
     //select room title based on room user columun which is a doctor
 
     // from rooms_id we get room number and room user which is the doctor that acceptes the student
-    protected $fillable = [ 'student_id', 'user_id'];
+    protected $fillable = [ 'student_id', 'doctor_id'];
 
 
     //queue has one student and one room
@@ -23,9 +23,9 @@ class Queue extends Model
         return $this->belongsTo(Student::class);
     }
 
-    public function room()
+    public function doctor()
     {
-        return $this->belongsTo(Room::class);
+        return $this->belongsTo(User::class);
     }
 
 

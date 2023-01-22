@@ -18,8 +18,8 @@ class DoctorController extends Controller
     {
         //
         return view('doctor.doctor', [
-            'students' => Queue::paginate(25),
-            'rooms' => Room::all(),
+            'students' => Queue::where('status', 0)->paginate(25),
+            // 'rooms' => Room::all(),
         ]);
     }
 
@@ -34,6 +34,20 @@ class DoctorController extends Controller
         $labhistories = LabResult::where('student_id', $student->id)->get();
         //dd($labhistories); // returns empty array
         //dd(count(Medication::where('medicalhistories_id', $histories->id)->get()))
+
+
+
+        //change queue status of the student when doctor accepts
+        $queueid = Queue::where('student_id', $student->id)->first();
+        //dd($queue->id);
+        //update queue status 
+        $queue = Queue::where('id', $queueid->id)->first();
+        $queue->status = 1;
+        $queue->save();
+
+
+
+
 
         //check if the student id existes in medical history table
         if ($histories === null) {

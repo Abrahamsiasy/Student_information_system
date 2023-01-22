@@ -11,6 +11,30 @@
                 <div class="p-6 text-gray-900">
 
 
+                    {{-- sample card for the view start--}}
+                    
+                    <div class=" h-54">
+                        <div class="flex justify-start p-2 bg-gray-600 flex-wrap">
+                            @foreach($queuesdoc as $key => $queue)
+                            <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm min-w-fit m-2">
+                                <h2 class="text-gray-900 text-4xl leading-tight font-bold"> -> {{ $queue->doctor->room->room_no }}</h2>
+                                <h5 class="text-gray-900 text-xl leading-tight font-medium mb-2">{{ $queue->student->student_id }}</h5>
+                                <p class="text-gray-700 text-base mb-1">
+                                    {{ $queue->student->first_name }}
+                              </p>
+                              <p class="text-gray-700 text-xs mb-1">
+                                {{ $queue->doctor->name }}
+                              </p>
+                            </div>
+                            @endforeach
+                           
+                            
+                          </div>
+                    </div>
+                                        {{-- sample card for the view start--}}
+
+                    
+
 
 
                     <div class="flex flex-col">
@@ -44,7 +68,7 @@
 
                                         <tbody>
 
-                                            @foreach ($queues as $key => $queue)
+                                            @foreach ($queues as $key => $que)
                                                 <tr class="border-b">
                                                     {{-- create a counter for each student --}}
                                                     <td
@@ -54,16 +78,17 @@
 
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $queue->student->student_id }}
+                                                        {{ $que->student->student_id }}
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $queue->student->first_name }}
+                                                        {{ $que->student->first_name }}
                                                     </td>
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{$rooms->room_no}}
+                                                        {{-- {{$rooms->room_no}} --}}
+                                                        {{-- {{ $que->doctor->room->room_no }} --}}
 
                                                     </td>
 
