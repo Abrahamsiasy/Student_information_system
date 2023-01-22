@@ -17,7 +17,8 @@ class QueueController extends Controller
     public function index()
     {
         //return list of students accepted by the doctor
-        $waitingQueue = Queue::where('status', 1)->paginate(25);
+        //$waitingQueue = Queue::where('status', 1)->paginate(25);
+        //dd($waitingQueue->count());
         // foreach ($waitingQueue as $key => $value) {
         //     # code...
         //     echo($value). "<hr>";

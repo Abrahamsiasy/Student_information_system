@@ -42,6 +42,7 @@ class DoctorController extends Controller
         //dd($queue->id);
         //update queue status 
         $queue = Queue::where('id', $queueid->id)->first();
+        $queue->doctor_id = auth()->user()->id;
         $queue->status = 1;
         $queue->save();
 
