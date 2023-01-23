@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.5deb2
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:3306
--- Generation Time: Jan 22, 2023 at 10:38 PM
--- Server version: 8.0.31-0ubuntu0.20.04.2
--- PHP Version: 8.2.1
+-- Host: 127.0.0.1
+-- Generation Time: Jan 23, 2023 at 03:55 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.2.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -29,8 +28,8 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `campas` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -53,9 +52,9 @@ INSERT INTO `campas` (`id`, `name`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE `clinics` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `campas_id` bigint UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `campas_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -78,12 +77,23 @@ INSERT INTO `clinics` (`id`, `name`, `campas_id`, `created_at`, `updated_at`) VA
 --
 
 CREATE TABLE `labqueues` (
-  `id` bigint UNSIGNED NOT NULL,
-  `student_id` bigint UNSIGNED NOT NULL,
-  `lab_assistant_id` bigint UNSIGNED DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `labreport_id` bigint(20) UNSIGNED NOT NULL,
+  `lab_assistant_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `student_id` bigint(20) UNSIGNED DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `labqueues`
+--
+
+INSERT INTO `labqueues` (`id`, `labreport_id`, `lab_assistant_id`, `status`, `created_at`, `updated_at`, `student_id`) VALUES
+(1, 3, 3, 1, NULL, '2023-01-23 21:38:00', 3),
+(4, 9, 3, 0, NULL, '2023-01-23 21:35:41', 4),
+(6, 12, 3, 0, NULL, NULL, 27);
 
 -- --------------------------------------------------------
 
@@ -92,24 +102,24 @@ CREATE TABLE `labqueues` (
 --
 
 CREATE TABLE `labreports` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `doctor_id` bigint UNSIGNED NOT NULL,
-  `student_id` bigint UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `doctor_id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `status` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data for table `labreports`
 --
 
-INSERT INTO `labreports` (`id`, `title`, `description`, `doctor_id`, `student_id`, `created_at`, `updated_at`) VALUES
-(3, 'Lab report one', 'Lab report one Lab report one', 1, 3, '2023-01-21 17:44:20', '2023-01-21 17:44:20'),
-(4, 'Lab report one', 'Lab report one', 1, 3, NULL, NULL),
-(5, 'Lab report one', 'Lab report one', 3, 2, NULL, NULL),
-(6, 'Lab report for student Baron', 'baron needs to get his blood tested', 3, 3, '2023-01-21 21:33:03', '2023-01-21 21:33:03');
+INSERT INTO `labreports` (`id`, `title`, `description`, `doctor_id`, `student_id`, `created_at`, `updated_at`, `status`) VALUES
+(3, 'Lab report one', 'Lab report one Lab report one', 1, 3, '2023-01-21 17:44:20', '2023-01-21 17:44:20', 0),
+(9, 'Lab report id 9, st 4', 'Lab report id 9, st 4', 3, 4, NULL, NULL, 0),
+(12, 'Laravel Senior Devloper', 'Laravel Senior Devloper', 3, 27, '2023-01-23 22:48:04', '2023-01-23 22:48:04', 0);
 
 -- --------------------------------------------------------
 
@@ -118,16 +128,16 @@ INSERT INTO `labreports` (`id`, `title`, `description`, `doctor_id`, `student_id
 --
 
 CREATE TABLE `lab_results` (
-  `id` bigint UNSIGNED NOT NULL,
-  `title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `comment` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `lab_report_id` bigint UNSIGNED NOT NULL,
-  `lab_assistant_id` bigint UNSIGNED NOT NULL,
-  `student_id` bigint UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `title` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `comment` varchar(255) NOT NULL,
+  `lab_report_id` bigint(20) UNSIGNED NOT NULL,
+  `lab_assistant_id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0'
+  `status` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -144,11 +154,11 @@ INSERT INTO `lab_results` (`id`, `title`, `description`, `comment`, `lab_report_
 --
 
 CREATE TABLE `medicalhistories` (
-  `id` bigint UNSIGNED NOT NULL,
-  `student_id` bigint UNSIGNED NOT NULL,
-  `doctor_id` bigint UNSIGNED DEFAULT NULL,
-  `lab_id` bigint UNSIGNED DEFAULT NULL,
-  `womens_id` bigint UNSIGNED DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` bigint(20) UNSIGNED NOT NULL,
+  `doctor_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `lab_id` bigint(20) UNSIGNED DEFAULT NULL,
+  `womens_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -165,7 +175,9 @@ INSERT INTO `medicalhistories` (`id`, `student_id`, `doctor_id`, `lab_id`, `wome
 (7, 22, 4, NULL, NULL, '2023-01-22 17:35:11', '2023-01-22 17:35:11'),
 (8, 11, 1, NULL, NULL, '2023-01-22 19:31:37', '2023-01-22 19:31:37'),
 (9, 5, 1, NULL, NULL, '2023-01-22 19:33:24', '2023-01-22 19:33:24'),
-(10, 27, 1, NULL, NULL, '2023-01-22 19:35:15', '2023-01-22 19:35:15');
+(10, 27, 1, NULL, NULL, '2023-01-22 19:35:15', '2023-01-22 19:35:15'),
+(11, 18, 1, NULL, NULL, '2023-01-23 14:01:54', '2023-01-23 14:01:54'),
+(12, 12, 1, NULL, NULL, '2023-01-23 14:10:41', '2023-01-23 14:10:41');
 
 -- --------------------------------------------------------
 
@@ -174,11 +186,11 @@ INSERT INTO `medicalhistories` (`id`, `student_id`, `doctor_id`, `lab_id`, `wome
 --
 
 CREATE TABLE `medications` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `dose` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `medicalhistories_id` bigint UNSIGNED DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `dose` varchar(255) NOT NULL,
+  `medicalhistories_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -198,9 +210,9 @@ INSERT INTO `medications` (`id`, `name`, `description`, `dose`, `medicalhistorie
 --
 
 CREATE TABLE `migrations` (
-  `id` int UNSIGNED NOT NULL,
-  `migration` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `batch` int NOT NULL
+  `id` int(10) UNSIGNED NOT NULL,
+  `migration` varchar(255) NOT NULL,
+  `batch` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -212,7 +224,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (2, '2023_01_16_170234_create_clinics_table', 2),
 (4, '2023_01_14_102022_create_students_table', 3),
 (5, '2014_10_12_000000_create_users_table', 4),
-(7, '2023_01_16_171314_create_labqueues_table', 5),
 (8, '2023_01_16_171255_create_queues_table', 6),
 (9, '2023_01_16_170744_create_labreports_table', 7),
 (11, '2023_01_16_183648_create_womens_table', 9),
@@ -223,7 +234,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (17, '2023_01_16_185821_create_lab_results_table', 14),
 (18, '2023_01_21_134402_add_status_to_lab_results', 15),
 (19, '2023_01_22_135942_add_is_acceoted_to_queues_table', 16),
-(20, '2023_01_22_151839_rename_rooms_column', 17);
+(20, '2023_01_22_151839_rename_rooms_column', 17),
+(22, '2023_01_23_074445_add_status_to_labreports_table', 19),
+(23, '2023_01_16_171314_create_labqueues_table', 20),
+(24, '2023_01_23_131151_add_student_id_to_table_labqueues', 21);
 
 -- --------------------------------------------------------
 
@@ -232,11 +246,11 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 --
 
 CREATE TABLE `personalmedicalhistories` (
-  `id` bigint UNSIGNED NOT NULL,
-  `disease_or_conditions` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `disease_or_conditions` varchar(255) NOT NULL,
   `current` tinyint(1) NOT NULL,
-  `comments` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `medicalhistories_id` bigint UNSIGNED DEFAULT NULL,
+  `comments` varchar(255) NOT NULL,
+  `medicalhistories_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -248,12 +262,12 @@ CREATE TABLE `personalmedicalhistories` (
 --
 
 CREATE TABLE `queues` (
-  `id` bigint UNSIGNED NOT NULL,
-  `student_id` bigint UNSIGNED NOT NULL,
-  `doctor_id` bigint UNSIGNED DEFAULT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` bigint(20) UNSIGNED NOT NULL,
+  `doctor_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `status` tinyint(1) NOT NULL DEFAULT '0'
+  `status` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -261,11 +275,12 @@ CREATE TABLE `queues` (
 --
 
 INSERT INTO `queues` (`id`, `student_id`, `doctor_id`, `created_at`, `updated_at`, `status`) VALUES
-(18, 3, 2, '2023-01-22 19:24:50', '2023-01-22 19:25:04', 1),
+(18, 3, 3, '2023-01-22 19:24:50', '2023-01-23 20:18:57', 1),
 (19, 5, 1, '2023-01-22 19:30:57', '2023-01-22 19:33:23', 1),
-(20, 11, 2, '2023-01-22 19:31:04', '2023-01-22 19:31:37', 1),
-(21, 18, NULL, '2023-01-22 19:31:09', '2023-01-22 19:31:09', 0),
-(22, 27, 1, '2023-01-22 19:35:02', '2023-01-22 19:35:15', 1);
+(20, 11, 3, '2023-01-22 19:31:04', '2023-01-23 16:13:43', 1),
+(21, 18, 2, '2023-01-22 19:31:09', '2023-01-23 14:01:54', 1),
+(22, 27, 3, '2023-01-22 19:35:02', '2023-01-23 22:47:42', 1),
+(23, 12, 1, NULL, '2023-01-23 14:10:41', 1);
 
 -- --------------------------------------------------------
 
@@ -274,12 +289,12 @@ INSERT INTO `queues` (`id`, `student_id`, `doctor_id`, `created_at`, `updated_at
 --
 
 CREATE TABLE `rooms` (
-  `id` bigint UNSIGNED NOT NULL,
-  `room_no` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `room_title` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `room_type` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `clinic_id` bigint UNSIGNED NOT NULL,
-  `user_id` bigint UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `room_no` varchar(255) NOT NULL,
+  `room_title` varchar(255) NOT NULL,
+  `room_type` varchar(255) NOT NULL,
+  `clinic_id` bigint(20) UNSIGNED NOT NULL,
+  `user_id` bigint(20) UNSIGNED NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -301,23 +316,23 @@ INSERT INTO `rooms` (`id`, `room_no`, `room_title`, `room_type`, `clinic_id`, `u
 --
 
 CREATE TABLE `students` (
-  `id` bigint UNSIGNED NOT NULL,
-  `student_id` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `first_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `middle_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `last_name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `sex` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `student_id` varchar(255) NOT NULL,
+  `first_name` varchar(255) NOT NULL,
+  `middle_name` varchar(255) NOT NULL,
+  `last_name` varchar(255) NOT NULL,
+  `sex` varchar(255) NOT NULL,
   `dob` date NOT NULL,
   `join_year` date NOT NULL,
-  `phone_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `profile` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `taken_semester` int NOT NULL,
-  `passed_semester` int NOT NULL,
+  `phone_number` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `profile` varchar(255) NOT NULL,
+  `taken_semester` int(11) NOT NULL,
+  `passed_semester` int(11) NOT NULL,
   `status` tinyint(1) NOT NULL,
-  `program` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `campas_id` bigint UNSIGNED NOT NULL,
-  `clinic_id` bigint UNSIGNED DEFAULT NULL,
+  `program` varchar(255) NOT NULL,
+  `campas_id` bigint(20) UNSIGNED NOT NULL,
+  `clinic_id` bigint(20) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -535,14 +550,14 @@ INSERT INTO `students` (`id`, `student_id`, `first_name`, `middle_name`, `last_n
 --
 
 CREATE TABLE `users` (
-  `id` bigint UNSIGNED NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `campas_id` bigint UNSIGNED NOT NULL DEFAULT '1',
-  `clinic_id` bigint UNSIGNED NOT NULL DEFAULT '1',
-  `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `password` varchar(255) NOT NULL,
+  `campas_id` bigint(20) UNSIGNED NOT NULL DEFAULT 1,
+  `clinic_id` bigint(20) UNSIGNED NOT NULL DEFAULT 1,
+  `remember_token` varchar(100) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -564,11 +579,11 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `ca
 --
 
 CREATE TABLE `womens` (
-  `id` bigint UNSIGNED NOT NULL,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `last_menstrual_cycle` date NOT NULL,
-  `number_of_pregnancies` int NOT NULL DEFAULT '0',
-  `pregnancie_complications` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `number_of_live_births:` int NOT NULL DEFAULT '0',
+  `number_of_pregnancies` int(11) NOT NULL DEFAULT 0,
+  `pregnancie_complications` varchar(255) DEFAULT NULL,
+  `number_of_live_births:` int(11) NOT NULL DEFAULT 0,
   `manopause_date` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -598,8 +613,9 @@ ALTER TABLE `clinics`
 --
 ALTER TABLE `labqueues`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `labqueues_student_id_foreign` (`student_id`),
-  ADD KEY `labqueues_lab_assistant_id_foreign` (`lab_assistant_id`);
+  ADD KEY `labqueues_labreport_id_foreign` (`labreport_id`),
+  ADD KEY `labqueues_lab_assistant_id_foreign` (`lab_assistant_id`),
+  ADD KEY `labqueues_student_id_foreign` (`student_id`);
 
 --
 -- Indexes for table `labreports`
@@ -698,85 +714,85 @@ ALTER TABLE `womens`
 -- AUTO_INCREMENT for table `campas`
 --
 ALTER TABLE `campas`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `clinics`
 --
 ALTER TABLE `clinics`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `labqueues`
 --
 ALTER TABLE `labqueues`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `labreports`
 --
 ALTER TABLE `labreports`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `lab_results`
 --
 ALTER TABLE `lab_results`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `medicalhistories`
 --
 ALTER TABLE `medicalhistories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `medications`
 --
 ALTER TABLE `medications`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT for table `personalmedicalhistories`
 --
 ALTER TABLE `personalmedicalhistories`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `queues`
 --
 ALTER TABLE `queues`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `rooms`
 --
 ALTER TABLE `rooms`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=202;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `womens`
 --
 ALTER TABLE `womens`
-  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -793,6 +809,7 @@ ALTER TABLE `clinics`
 --
 ALTER TABLE `labqueues`
   ADD CONSTRAINT `labqueues_lab_assistant_id_foreign` FOREIGN KEY (`lab_assistant_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `labqueues_labreport_id_foreign` FOREIGN KEY (`labreport_id`) REFERENCES `labreports` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `labqueues_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE;
 
 --
