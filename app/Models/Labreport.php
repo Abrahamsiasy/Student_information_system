@@ -31,5 +31,18 @@ class Labreport extends Model
     //     return $this->belongsTo(Medicalhistory::class);
     // }
 
+    //lab report has one student
+    public function student()
+    {
+        return $this->belongsTo(Student::class);
+    }
+
+    //lab report has one labqueue
+    public function labqueues()
+    {
+        return $this->hasMany(Labqueues::class);
+    }
+
+
 
 }

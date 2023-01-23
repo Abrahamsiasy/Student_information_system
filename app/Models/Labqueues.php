@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Labreport;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Labqueues extends Model
 {
@@ -14,14 +15,14 @@ class Labqueues extends Model
     protected $fillable = ['student_id', 'lab_assistant_id'];
 
     //Labqueues has one user
-    public function lab_assistant()
+    public function labAssistant()
     {
         return $this->belongsTo(User::class);
     }
 
-    public function student()
+    public function labreport()
     {
-        return $this->belongsTo(Student::class);
+        return $this->belongsTo(Labreport::class);
     }
 
 }

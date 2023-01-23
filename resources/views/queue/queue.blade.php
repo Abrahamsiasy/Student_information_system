@@ -9,25 +9,13 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
-
-
                     {{-- sample card for the view start--}}
                     {{-- include wedgit  --}}
                     {{-- @assyncwedgit('Queuewidgit') --}}
                     @asyncWidget('Queuewidgit')
-
-
                     {{-- {{ Widget::run('Queuewidgit')  }} --}}
-
                     {{-- cmment start --}}
-
-
-
                     {{-- comment end --}}
-
-
-
-
                 </div>
             </div>
         </div>
