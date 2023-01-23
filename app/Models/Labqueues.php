@@ -14,9 +14,9 @@ class Labqueues extends Model
     protected $fillable = ['student_id', 'lab_assistant_id'];
 
     //Labqueues has one user
-    public function user()
+    public function lab_assistant()
     {
-        return $this->belongsTo(User::class,'student_id');
+        return $this->belongsTo(User::class);
     }
 
     public function student()

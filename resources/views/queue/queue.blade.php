@@ -16,12 +16,13 @@
                     {{-- @assyncwedgit('Queuewidgit') --}}
                     @asyncWidget('Queuewidgit')
 
+
                     {{-- {{ Widget::run('Queuewidgit')  }} --}}
 
                     {{-- cmment start --}}
 
-                    
-                    
+
+
                     {{-- comment end --}}
 
 

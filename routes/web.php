@@ -6,6 +6,7 @@ use App\Http\Controllers\DoctorController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\LabAssistantController;
+use App\Http\Controllers\LabqueuesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +37,7 @@ Route::middleware('auth')->group(function () {
 Route::controller(StudentController::class)->group(
     function () {
         Route::get('student', 'index');
-        //add student to que and 
+        //add student to que and
         Route::get('student/{student}', 'show');
     }
 );
@@ -44,10 +45,15 @@ Route::controller(StudentController::class)->group(
 Route::controller(QueueController::class)->group(
     function () {
         Route::get('queue', 'index');
-
-        
     }
 );
+//lab queue index route
+Route::controller(LabqueuesController::class)->group(
+    function () {
+        Route::get('labqueue', 'index');
+    }
+);
+
 //doctor index route
 Route::controller(DoctorController::class)->group(
     function () {

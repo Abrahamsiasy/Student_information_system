@@ -13,20 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('labqueues', function (Blueprint $table) {
-            $table->id();
-            //student queues
+        Schema::table('labqueues', function (Blueprint $table) {
+            //
+            $table->dropForeign(['student_id']);
             $table->unsignedBigInteger('labreport_id');
             $table->foreign('labreport_id')->references('id')->on('labreports')->onDelete('cascade');
-
-            //doctor queues
-            $table->unsignedBigInteger('lab_assistant_id')->nullable();
-            $table->foreign('lab_assistant_id')->references('id')->on('users')->onDelete('cascade');
-            $table->boolean('status')->default(0);
-
-
-            $table->timestamps();
         });
+
     }
 
     /**
@@ -36,6 +29,9 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('labqueues');
+        Schema::table('labqueues', function (Blueprint $table) {
+            //
+            $table->dropForeign('labreport_id');
+        });
     }
 };

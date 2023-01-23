@@ -40,7 +40,7 @@ class DoctorController extends Controller
         //change queue status of the student when doctor accepts
         $queueid = Queue::where('student_id', $student->id)->first();
         //dd($queue->id);
-        //update queue status 
+        //update queue status
         $queue = Queue::where('id', $queueid->id)->first();
         $queue->doctor_id = auth()->user()->id;
         $queue->status = 1;
@@ -97,9 +97,12 @@ class DoctorController extends Controller
         $product->description = $request->description;
         $product->student_id = $student->id;
         $product->doctor_id = auth()->user()->id;
-        //dd($product);
         $product->save();
-
+        //dd($product->id);
         //Labreport::create($formField);
+
+        if($product->id){
+            //return redirect()->route('doctor.doctor', ['student_id' => $student->id]);
+        }
     }
 }
