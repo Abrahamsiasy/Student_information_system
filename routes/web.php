@@ -69,10 +69,11 @@ Route::controller(DoctorController::class)->group(
 Route::controller(LabAssistantController::class)->group(
     function () {
         Route::get('lab', 'index');
+        //Route::get('lab/detail', 'show');
+        Route::get('lab/detail/{student}', 'show');
         //post lab report
-        Route::post('lab/detail/{student}', 'storeLabReports');
-        //Route::get('doctor/detail', 'show');
-        Route::get('lab/lab/{student}', 'show');
+        Route::post('lab/detail/{student}', 'storeLabResultss');
+
     },
 );
 

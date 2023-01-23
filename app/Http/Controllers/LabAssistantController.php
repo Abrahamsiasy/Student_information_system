@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Room;
+use App\Models\Student;
 use App\Models\Labqueues;
+use App\Models\Labreport;
+use App\Models\LabResult;
 use Illuminate\Http\Request;
 
 class LabAssistantController extends Controller
@@ -13,8 +16,72 @@ class LabAssistantController extends Controller
     {
         //
         return view('lab.lab', [
-            'students' => Labqueues::paginate(25),
-            'rooms' => Room::all(),
+            'labqueues' => Labqueues::where('status', 0)->paginate(25),
+            // 'rooms' => Room::all(),
         ]);
+    }
+
+
+
+    public function show(
+        Student $student,
+    ) {
+        //change queue status of the student when doctor accepts
+        $queueid = Labqueues::where('student_id', $student->id)->first();
+        //dd($queueid);
+        //update queue status
+        $labqueue = Labqueues::where('id', $queueid->id)->first();
+        $labqueue->lab_assistant_id = auth()->user()->id;
+        $labqueue->status = 1;
+        // $labqueue->save();
+        //dd($labqueue->status);
+
+
+        //get the lab report based on lab queue id
+        $labreport = Labreport::where('id', $labqueue->labreport_id)->first();
+        //dd($labreport);
+
+        return view('lab.result', [
+            'student' => $student,
+            'labreport' =>$labreport
+        ]);
+    }
+
+
+
+    public function storeLabResultss(Request $request, Student $student)
+    {
+        //dd($student->id);
+        $formField = $request->validate([
+            'title' => 'required',
+            'description'  => 'required',
+            'comment'  => 'required'
+
+        ]);
+        // $formField['lab_assistant_id '] = auth()->user()->id;
+        // $formField['student_id '] = $student->id;
+        // dd($formField);
+        // // or anther method
+
+        $queueid = Labqueues::where('student_id', $student->id)->first();
+        $labqueue = Labqueues::where('id', $queueid->id)->first();
+        //dd($labqueue->labreport_id);
+
+
+
+        $result = new LabResult();
+        $result->title = $request->title;
+        $result->description = $request->description;
+        $result->comment = $request->comment;
+        $result->student_id = $student->id;
+        $result->lab_report_id = $labqueue->labreport_id;
+
+        $result->lab_assistant_id = auth()->user()->id;
+        dd($result);
+        dd($result);
+        //$product->save();
+        dd($result->id);
+        //Labreport::create($formField);
+
     }
 }

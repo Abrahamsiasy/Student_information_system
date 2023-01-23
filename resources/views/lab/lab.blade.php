@@ -26,16 +26,17 @@
                                                 </th>
                                                 <th scope="col"
                                                     class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
+                                                    ID
+                                                </th>
+                                                <th scope="col"
+                                                    class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
                                                     STUDENT ID
                                                 </th>
                                                 <th scope="col"
                                                     class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
                                                     STUDENT NAME
                                                 </th>
-                                                <th scope="col"
-                                                    class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
-                                                    ROOM ID
-                                                </th>
+
                                                 <th scope="col"
                                                     class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
                                                     Action
@@ -47,7 +48,7 @@
 
                                         <tbody>
 
-                                            @foreach ($students as $key => $student)
+                                            @foreach ($labqueues as $key => $labqueue)
                                                 <tr class="border-b">
                                                     {{-- create a counter for each student --}}
                                                     <td
@@ -57,23 +58,25 @@
 
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $student->student->student_id }}
+                                                        {{ $labqueue->labreport->student->id }}
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $student->student->first_name }}
-                                                    </td>
+                                                        {{ $labqueue->labreport->student->student_id }}
                                                     </td>
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $student->student->campas->name }}
+                                                        {{ $labqueue->labreport->student->first_name }}
                                                     </td>
+                                                    </td>
+
 
                                                     <td
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                         <div class="inline-flex shadow-md hover:shadow-lg focus:shadow-lg"
                                                             role="group">
-                                                            <a href="/doctor/detail/{{$student->student->id}}"
+                                                            {{-- go the that que --}}
+                                                            <a href="/lab/detail/{{ $labqueue->labreport->student->id }}"
                                                                 class="rounded-l inline-block px-6 py-2.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase hover:bg-green-600 focus:bg-green-600 focus:outline-none focus:ring-0 active:bg-green-700 transition duration-150 ease-in-out">Accept</a>
 
                                                         </div>
@@ -87,7 +90,7 @@
 
                                         </tbody>
                                     </table>
-                                    {{-- <div class="py-6">{{ $students->links() }}</div> --}}
+                                    {{-- <div class="py-6">{{ $labqueues->links() }}</div> --}}
                                 </div>
                             </div>
                         </div>
