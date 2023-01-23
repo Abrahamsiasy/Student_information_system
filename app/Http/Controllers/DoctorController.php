@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Labqueues;
 use App\Models\Room;
 use App\Models\Queue;
 use App\Models\Student;
@@ -92,17 +93,24 @@ class DoctorController extends Controller
         $formField['student_id '] = $student->id;
         // dd($formField);
         // // or anther method
-        $product = new Labreport();
-        $product->title = $request->title;
-        $product->description = $request->description;
-        $product->student_id = $student->id;
-        $product->doctor_id = auth()->user()->id;
-        $product->save();
-        //dd($product->id);
+        $labReport = new Labreport();
+        $labReport->title = $request->title;
+        $labReport->description = $request->description;
+        $labReport->student_id = $student->id;
+        $labReport->doctor_id = auth()->user()->id;
+        $labReport->save();
+        //dd($labReport->id);
         //Labreport::create($formField);
 
-        if($product->id){
-            //return redirect()->route('doctor.doctor', ['student_id' => $student->id]);
+        if($labReport->id){
+            //create lab que with labreport id
+            $labQueue = new Labqueues();
+            $labQueue->labreport_id = $labReport->id;
+            $labQueue->student_id = $student->id;
+            $labQueue->save();
+
+            // return redirect()->route('doctor.student_info', ['student_id' => $student->id]);
+            
         }
     }
 }

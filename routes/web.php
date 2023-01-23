@@ -70,7 +70,7 @@ Route::controller(LabAssistantController::class)->group(
     function () {
         Route::get('lab', 'index');
         //Route::get('lab/detail', 'show');
-        Route::get('lab/detail/{student}', 'show');
+        Route::get('lab/lab/{student}', 'show');
         //post lab report
         Route::post('lab/detail/{student}', 'storeLabResultss');
 

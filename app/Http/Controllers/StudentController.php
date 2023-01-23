@@ -58,7 +58,7 @@ class StudentController extends Controller
         //dd($student->student_id);
         $formField['student_id'] = $student->id;
         Queue::create($formField);
-        dd($student->student_id);
+        //dd($student->student_id);
         //return view students
         return view('student.index', [
             'students' => Student::paginate(50),

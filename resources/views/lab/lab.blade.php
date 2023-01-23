@@ -76,7 +76,7 @@
                                                         <div class="inline-flex shadow-md hover:shadow-lg focus:shadow-lg"
                                                             role="group">
                                                             {{-- go the that que --}}
-                                                            <a href="/lab/detail/{{ $labqueue->labreport->student->id }}"
+                                                            <a href="/lab/lab/{{ $labqueue->labreport->student->id }}"
                                                                 class="rounded-l inline-block px-6 py-2.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase hover:bg-green-600 focus:bg-green-600 focus:outline-none focus:ring-0 active:bg-green-700 transition duration-150 ease-in-out">Accept</a>
 
                                                         </div>

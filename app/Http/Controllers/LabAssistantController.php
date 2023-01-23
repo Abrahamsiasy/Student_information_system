@@ -33,7 +33,7 @@ class LabAssistantController extends Controller
         $labqueue = Labqueues::where('id', $queueid->id)->first();
         $labqueue->lab_assistant_id = auth()->user()->id;
         $labqueue->status = 1;
-        // $labqueue->save();
+        $labqueue->save();
         //dd($labqueue->status);
 
 
@@ -77,11 +77,16 @@ class LabAssistantController extends Controller
         $result->lab_report_id = $labqueue->labreport_id;
 
         $result->lab_assistant_id = auth()->user()->id;
-        dd($result);
-        dd($result);
-        //$product->save();
-        dd($result->id);
+        $result->save();
+
+        //get the labque id and delte * from lab queue so it disapears from the labque list
+        $labque = Labqueues::find($labqueue);
+        $labque->each->delete();
+        //after the labque is delted the it needs to create main que back to the doctor get doector id from lab report and put it back
+        
         //Labreport::create($formField);
+        //redirect to view lab
+        return redirect()->route('lab');
 
     }
 }
