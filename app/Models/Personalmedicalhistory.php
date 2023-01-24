@@ -13,7 +13,6 @@ class Personalmedicalhistory extends Model
     //stores personal past desis condition and their status
     
         // define the table name    and columns
-        protected $table = 'personal_medical_history';
         protected $fillable = [
             'disease_or_conditions',
             'current',

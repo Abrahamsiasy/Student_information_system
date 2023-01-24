@@ -11,6 +11,7 @@ use App\Models\LabResult;
 use App\Models\Medication;
 use Illuminate\Http\Request;
 use App\Models\Medicalhistory;
+use App\Models\Personalmedicalhistory;
 
 class DoctorController extends Controller
 {
@@ -81,7 +82,10 @@ class DoctorController extends Controller
             'medhistories' => $medhistories,
         ]);
     }
-
+    //get doctor id from loged in user(AUTH) the creat a lab report 
+    //with that doctor id for lab que and create lab que to be edited 
+    //with lab assistant id then redirect back to doc page with list of student 
+    //to be accepted
     public function storeLabReports(Request $request, Student $student)
     {
         $formField = $request->validate([
@@ -113,7 +117,68 @@ class DoctorController extends Controller
             return redirect('/doctor/detail/' . $student->id)->with('status', 'Lab sent!');
         }
     }
+    //storeMedRecord
+    public function storeMedRecord(Request $request, Student $student)
+    {
+        $formField = $request->validate([
+            'name' => 'required',
+            'dose'  => 'required',
+            'description' => 'required'
 
+        ]);
+        $histories = Medicalhistory::where('student_id', $student->id)->first();
+        // $formField['doctor_id '] = auth()->user()->id;
+        // $formField['student_id '] = $student->id;
+        // $formField['medicalhistories_id '] = $histories->id;
+        // dd($formField);
+        $medicalrecord = new Medication();
+        
+        $medicalrecord->name = $formField['name'];
+        $medicalrecord->dose = $formField['dose'];
+        $medicalrecord->description = $formField['description'];
+        $medicalrecord->medicalhistories_id = $histories->id;
+        $medicalrecord->save();
+        //dd($medicalrecord->id);
+        // // or anther method
+
+
+        //redirect to its own page
+        return redirect('/doctor/detail/' . $student->id)->with('status', 'Medcin added!');
+    }
+
+
+
+    //storeMedRecord
+    public function storePersonalRecord(Request $request, Student $student)
+    {
+        //dd("sfsdfs");
+        $formField = $request->validate([
+            'disease_or_conditions' => 'required',
+            'current' => 'required',
+            'comments' => 'required'
+
+        ]);
+        $histories = Medicalhistory::where('student_id', $student->id)->first();
+        // $formField['doctor_id '] = auth()->user()->id;
+        // $formField['student_id '] = $student->id;
+        // $formField['medicalhistories_id '] = $histories->id;
+        // dd($formField);
+        $personalmedicalrecord = new Personalmedicalhistory();
+        
+        $personalmedicalrecord->disease_or_conditions = $formField['disease_or_conditions'];
+        $personalmedicalrecord->current = $formField['current'];
+        $personalmedicalrecord->comments = $formField['comments'];
+        $personalmedicalrecord->medicalhistories_id = $histories->id;
+        $personalmedicalrecord->save();
+        dd($personalmedicalrecord);
+        // // or anther method
+
+
+        //redirect to its own page
+        return redirect('/doctor/detail/' . $student->id)->with('status', 'Medcin added!');
+    }
+
+    //delete que where student id is given
     public function delete(Student $student)
     {
         //find queue where student_id = $student->id

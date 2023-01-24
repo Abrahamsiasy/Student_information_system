@@ -172,7 +172,7 @@
 
                     {{-- lab report create start --}}
                     <div>
-                        <form method="POST" class="p-7" action="/doctor/detail/{{ $student->id }}">
+                        <form method="POST" class="p-7" action="/doctor/detail/record/lab/{{ $student->id }}">
                             @csrf
                             <h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-blue-600"> Lab Request Form</h5>
                             <div class="mb-6">
@@ -200,15 +200,27 @@
                     </div>
                     {{-- medt create end --}}
                     <div>
-                        <form method="POST" class="p-7" action="/doctor/detail/{{ $student->id }}">
+                        <form method="POST" class="p-7" action="/doctor/detail/record/med/{{ $student->id }}">
                             @csrf
-                            <h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-blue-600">Previous med </h5>
+                            <h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-blue-600">Med History Form
+                            </h5>
                             <div class="mb-6">
-                                <label class="block mb-2 text-sm font-medium text-gray-900  ">Lab Title</label>
-                                <input type="titel" name="title"
+                                <label class="block mb-2 text-sm font-medium text-gray-900  ">Med Name</label>
+                                <input type="titel" name="name" placeholder="Parastamon"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             </div>
-                            @error('title')
+                            @error('name')
+                                <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4"
+                                    role="alert">
+                                    <p>{{ $message }}.</p>
+                                </div>
+                            @enderror
+                            <div class="mb-6">
+                                <label class="block mb-2 text-sm font-medium text-gray-900  ">Med Dose</label>
+                                <input type="text" name="dose" placeholder="500g, twice a day"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            </div>
+                            @error('dose')
                                 <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4"
                                     role="alert">
                                     <p>{{ $message }}.</p>
@@ -224,9 +236,68 @@
                             </div>
                             <button type="submit"
                                 class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Submit
-                                Lab Request</button>
+                                Med History</button>
                         </form>
                         {{-- med histry form end --}}
+
+                        {{-- Personal Desiss and behavior form start --}}
+                        <form method="POST" class="p-7"
+                            action="/doctor/detail/record/personal/{{ $student->id }}">
+                            @csrf
+                            <h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-blue-600">Personal behavior
+                                History Form
+                            </h5>
+                            <div class="mb-6">
+                                <label class="block mb-2 text-sm font-medium text-gray-900  ">Title</label>
+                                <input type="text" name="disease_or_conditions"
+                                    placeholder="Enter previos life style or diseas history"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            </div>
+                            @error('disease_or_conditions')
+                                <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4"
+                                    role="alert">
+                                    <p>{{ $message }}.</p>
+                                </div>
+                            @enderror
+
+                            <div class="mb-6">
+                                <label class="block mb-2 text-sm font-medium text-gray-900  ">Type your current
+                                    status</label>
+                                <input type="text" name="current" placeholder="1"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            </div>
+                            @error('current')
+                                <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4"
+                                    role="alert">
+                                    <p>{{ $message }}.</p>
+                                </div>
+                            @enderror
+
+                            <div class="flex items-center mb-4">
+                                <input id="default-checkbox" type="checkbox"
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="default-checkbox"
+                                    class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"> Still
+                                    Ongoing
+                                </label>
+                            </div>
+                            <br>
+                            <div class="mb-6">
+                                <label class="block mb-2 text-sm font-medium text-gray-900  ">
+                                    Description</label>
+                                <textarea name="comments"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    rows="5">
+                                </textarea>
+                            </div>
+                            <button type="submit"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Submit
+                                Personal History</button>
+                        </form>
+                        {{-- personal med histry form end --}}
+                        {{-- Personal Desis and behavior form end ehere --}}
+
+
                     </div>
                     <form>
                         <div class="flex gap-2 m-2 flex-col">

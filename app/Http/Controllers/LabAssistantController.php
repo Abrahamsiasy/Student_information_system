@@ -44,7 +44,7 @@ class LabAssistantController extends Controller
 
         return view('lab.result', [
             'student' => $student,
-            'labreport' =>$labreport
+            'labreport' => $labreport
         ]);
     }
 
@@ -95,11 +95,10 @@ class LabAssistantController extends Controller
         //$queue = Queue::where('student_id', $student->id)->first(); //cant be used since queue is deleted
         $labReport = Labreport::where('student_id', $student->id)->first();
         $queue = new Queue();
-            $queue->student_id = $student->id;
-            $queue->doctor_id = $labReport->doctor_id;
-            $queue->status = 1;
-            $queue->save();
+        $queue->student_id = $student->id;
+        $queue->doctor_id = $labReport->doctor_id;
+        $queue->status = 1;
+        $queue->save();
         return redirect('/lab')->with('status', 'Lab Result submited to the doctor');
-
     }
 }

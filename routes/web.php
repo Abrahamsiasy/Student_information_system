@@ -64,7 +64,9 @@ Route::controller(DoctorController::class)->group(
     function () {
         Route::get('doctor', 'index');
         //post lab report
-        Route::post('doctor/detail/{student}', 'storeLabReports');
+        Route::post('doctor/detail/record/lab/{student}', 'storeLabReports');
+        Route::post('doctor/detail/record/med/{student}', 'storeMedRecord');
+        Route::post('doctor/detail/record/personal/{student}', 'storePersonalRecord');
         //Route::get('doctor/detail', 'show');
         Route::get('doctor/detail/{student}', 'show');
 
