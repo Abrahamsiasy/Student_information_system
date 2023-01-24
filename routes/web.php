@@ -39,6 +39,11 @@ Route::controller(StudentController::class)->group(
         Route::get('student', 'index');
         //add student to que and
         Route::get('student/{student}', 'show');
+
+        Route::get('s', 'index');
+        
+
+
     }
 );
 //queue index routes
@@ -62,6 +67,9 @@ Route::controller(DoctorController::class)->group(
         Route::post('doctor/detail/{student}', 'storeLabReports');
         //Route::get('doctor/detail', 'show');
         Route::get('doctor/detail/{student}', 'show');
+
+        //delete que after the tudent complits
+        Route::delete('doctor/detail/{student}', 'delete');
     },
 );
 

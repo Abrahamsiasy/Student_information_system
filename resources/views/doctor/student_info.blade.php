@@ -16,7 +16,7 @@
                             {{ session('status') }}
                         </div>
                     @endif
-                                        {{-- succses messahe start here --}}
+                    {{-- succses messahe start here --}}
 
                     <div class="w-full mx-2 ">
                         <!-- Profile tab -->
@@ -190,11 +190,11 @@
                                     Description</label>
                                 <textarea name="description"
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                    rows="5">
-                                </textarea>
+                                    rows="5"></textarea>
                             </div>
                             <button type="submit"
-                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Submit Lab Request</button>
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Submit
+                                Lab Request</button>
                         </form>
                         {{-- lab report create end --}}
                     </div>
@@ -209,7 +209,8 @@
                                     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             </div>
                             @error('title')
-                                <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
+                                <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4"
+                                    role="alert">
                                     <p>{{ $message }}.</p>
                                 </div>
                             @enderror
@@ -222,15 +223,27 @@
                                 </textarea>
                             </div>
                             <button type="submit"
-                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Submit Lab Request</button>
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Submit
+                                Lab Request</button>
                         </form>
                         {{-- med histry form end --}}
                     </div>
-                    <div>
-                        <button type="submit"
-                            class="text-white text-4xl justify-center align-middle bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-9xl rounded-lg w-full sm:w-auto px-5 py-2.5 text-center ">Submit</button>
+                    <form>
+                        <div class="flex gap-2 m-2 flex-col">
+                            <button type="submit"
+                                class="text-white text-4xl justify-center align-middle bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-9xl rounded-lg w-full sm:w-auto px-5 py-2.5 text-center ">
+                                Come Back After Lab Results</button>
+                        </div>
+                    </form>
+                    <form method="POST" action="/doctor/detail/{{ $student->id }}">
+                        @csrf
+                        @method('DELETE')
+                        <div class="flex gap-2 m-2 flex-col">
+                            <button type="submit"Lab Descriptio
+                                class="text-white text-4xl justify-center align-middle bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-9xl rounded-lg w-full sm:w-auto px-5 py-2.5 text-center ">Done</button>
+                        </div>
+                    </form>
 
-                    </div>
 
                 </div>
             </div>

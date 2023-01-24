@@ -102,7 +102,7 @@ class DoctorController extends Controller
         //dd($labReport->id);
         //Labreport::create($formField);
 
-        if($labReport->id){
+        if ($labReport->id) {
             //create lab que with labreport id
             $labQueue = new Labqueues();
             $labQueue->labreport_id = $labReport->id;
@@ -110,9 +110,18 @@ class DoctorController extends Controller
             $labQueue->save();
 
             //redirect to its own page
-            return redirect('/doctor/detail/'.$student->id)->with('status', 'Lab sent!');
-
-
+            return redirect('/doctor/detail/' . $student->id)->with('status', 'Lab sent!');
         }
+    }
+
+    public function delete(Student $student)
+    {
+        //find queue where student_id = $student->id
+        $queue = Queue::where('student_id', $student->id)->first();
+        //dd($queue);
+
+        $queue->delete();
+
+        return redirect('/doctor')->with('status', 'Queue deleted!');
     }
 }

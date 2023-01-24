@@ -10,7 +10,14 @@
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
 
-
+                    {{-- succses messahe start here --}}
+                    @if (session()->has('status'))
+                        <div class="p-4 mb-4 text-lg text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                            role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+                    {{-- succses messahe start here --}}
 
 
                     <div class="flex flex-col">
@@ -26,7 +33,7 @@
                                                 </th>
                                                 <th scope="col"
                                                     class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
-                                                     ID
+                                                    ID
                                                 </th>
                                                 <th scope="col"
                                                     class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
@@ -90,7 +97,7 @@
                                                         class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
                                                         <div class="inline-flex shadow-md hover:shadow-lg focus:shadow-lg"
                                                             role="group">
-                                                            <a href="/doctor/detail/{{$student->student->id}}"
+                                                            <a href="/doctor/detail/{{ $student->student->id }}"
                                                                 class="rounded-l inline-block px-6 py-2.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase hover:bg-green-600 focus:bg-green-600 focus:outline-none focus:ring-0 active:bg-green-700 transition duration-150 ease-in-out">Accept</a>
 
                                                         </div>

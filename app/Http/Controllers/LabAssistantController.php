@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Room;
 use App\Models\Student;
 use App\Models\Labqueues;
+use App\Models\Queue;
 use App\Models\Labreport;
 use App\Models\LabResult;
 use Illuminate\Http\Request;
@@ -85,7 +86,19 @@ class LabAssistantController extends Controller
         //after the labque is delted the it needs to create main que back to the doctor get doector id from lab report and put it back
 
         //Labreport::create($formField);
+
+
+        //after deleting lab que send the student straigh to the doctor by adding it to que with status one
         //redirect to view lab
+
+        //slect from queue where student_id = $student->id
+        //$queue = Queue::where('student_id', $student->id)->first(); //cant be used since queue is deleted
+        $labReport = Labreport::where('student_id', $student->id)->first();
+        $queue = new Queue();
+            $queue->student_id = $student->id;
+            $queue->doctor_id = $labReport->doctor_id;
+            $queue->status = 1;
+            $queue->save();
         return redirect('/lab')->with('status', 'Lab Result submited to the doctor');
 
     }
