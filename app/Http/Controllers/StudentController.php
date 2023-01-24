@@ -26,6 +26,18 @@ class StudentController extends Controller
         ]);
     }
 
+    public function show(Student $student)
+    {
+        //
+        //dd($student->student_id);
+        $formField['student_id'] = $student->id;
+        //dd($student->student_id);
+        Queue::create($formField);
+        //return view students
+        return redirect('/student')->with('status', $student->student_id . 'Added To Queue list');
+
+    }
+
     public function filterCampas()
     {
         //return  Hash::make(123456789);
@@ -63,19 +75,7 @@ class StudentController extends Controller
      * @param  \App\Models\Student  $student
      * @return \Illuminate\Http\Response
      */
-    public function show(Student $student)
-    {
-        //
-        //dd($student->student_id);
-        $formField['student_id'] = $student->id;
-        Queue::create($formField);
-        //dd($student->student_id);
-        //return view students
-        return view('student.index', [
-            'students' => Student::paginate(50),
-            'campas' => Campas::all()
-        ]);
-    }
+
 
     /**
      * Show the form for editing the specified resource.

@@ -37,9 +37,8 @@ Route::middleware('auth')->group(function () {
 Route::controller(StudentController::class)->group(
     function () {
         Route::get('student', 'index');
-        Route::get('s', 'filterCampas');
         //add student to que and
-        //Route::get('student/{student}', 'show');
+        Route::get('student/{student}', 'show');
     }
 );
 //queue index routes
@@ -71,7 +70,7 @@ Route::controller(LabAssistantController::class)->group(
     function () {
         Route::get('lab', 'index');
         //Route::get('lab/detail', 'show');
-        Route::get('lab/lab/{student}', 'show');
+        Route::get('lab/detail/{student}', 'show');
         //post lab report
         Route::post('lab/detail/{student}', 'storeLabResultss');
 

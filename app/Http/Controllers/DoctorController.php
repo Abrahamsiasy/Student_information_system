@@ -109,8 +109,10 @@ class DoctorController extends Controller
             $labQueue->student_id = $student->id;
             $labQueue->save();
 
-            // return redirect()->route('doctor.student_info', ['student_id' => $student->id]);
-            
+            //redirect to its own page
+            return redirect('/doctor/detail/'.$student->id)->with('status', 'Lab sent!');
+
+
         }
     }
 }

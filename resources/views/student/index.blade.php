@@ -7,154 +7,161 @@
 
 
 
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                <div class="p-6 text-gray-900">
-                    {{-- to be deleted start --}}
+    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 mt-2">
+        <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+            {{-- succses messahe here --}}
+            @if (session()->has('status'))
+                <div class="p-4 mb-4 text-lg text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                    role="alert">
+                    {{ session('status') }}
+                </div>
+            @endif
+            <div class="p-6 text-gray-900">
+                {{-- to be deleted start --}}
 
-                    <form method="" class="py-4">
+                <form method="" class="py-4">
 
-                        <div class="flex">
-                            <select
-                                class="min-w-10    font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200">
-                                {{-- fetch catagories --}}
-                                @foreach ($campas as $camp)
-                                    <option value="/?tag={{$camp->id}}" class="">{{ $camp->name }} </option>
-                                @endforeach
-                            </select>
-                            <div class="relative w-full">
-                                <input type="search" id="search-dropdown"
-                                    class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
-                                    placeholder="Search Student by Name, Id ..." required>
-                                <button type="submit"
-                                    class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-green-500 rounded-r-lg border border-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-                                    <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                    </svg>
-                                    <span class="sr-only">Search</span>
-                                </button>
-                            </div>
+                    <div class="flex">
+                        <select
+                            class="min-w-10    font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200">
+                            {{-- fetch catagories --}}
+                            @foreach ($campas as $camp)
+                                <option value="/?tag={{ $camp->id }}" class="">{{ $camp->name }} </option>
+                            @endforeach
+                        </select>
+                        <div class="relative w-full">
+                            <input type="search" id="search-dropdown"
+                                class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
+                                placeholder="Search Student by Name, Id ..." required>
+                            <button type="submit"
+                                class="absolute top-0 right-0 p-2.5 text-sm font-medium text-white bg-green-500 rounded-r-lg border border-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+                                <svg aria-hidden="true" class="w-5 h-5" fill="none" stroke="currentColor"
+                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                </svg>
+                                <span class="sr-only">Search</span>
+                            </button>
                         </div>
-                    </form>
+                    </div>
+                </form>
 
-                    {{-- to be delted end --}}
-                    {{-- Tailwind dropdown sselect option start --}}
-                    <select name="catagory_id" id="catagory_id"
-                        class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        aria-label="Default select example">
+                {{-- to be delted end --}}
+                {{-- Tailwind dropdown sselect option start --}}
+                <select name="catagory_id" id="catagory_id"
+                    class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                    aria-label="Default select example">
 
-                        {{-- fetch catagories --}}
-                        @foreach ($campas as $camp)
-                            <option value="{{ $camp->id }}">{{ $camp->name }}</option>
-                        @endforeach
-                    </select>
-
-
-
-                    {{-- search and drop down start --}}
+                    {{-- fetch catagories --}}
+                    @foreach ($campas as $camp)
+                        <option value="{{ $camp->id }}">{{ $camp->name }}</option>
+                    @endforeach
+                </select>
 
 
 
-
-                    {{-- search and drop down end --}}
+                {{-- search and drop down start --}}
 
 
 
 
+                {{-- search and drop down end --}}
 
 
-                    {{-- Tailwind dropdown sselect option end --}}
 
-                    {{-- Tailwind table start --}}
-                    <div class="flex flex-col">
-                        <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
-                            <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                                <div class="overflow-hidden">
-                                    <table class="min-w-full">
-                                        <thead class="border-b">
-                                            <tr>
-                                                <th scope="col"
-                                                    class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
-                                                    #
-                                                </th>
-                                                <th scope="col"
-                                                    class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
-                                                    STUDENT ID
-                                                </th>
-                                                <th scope="col"
-                                                    class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
-                                                    STUDENT NAME
-                                                </th>
-                                                <th scope="col"
-                                                    class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
-                                                    CAMPAS
-                                                </th>
-                                                <th scope="col"
-                                                    class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
-                                                    Status
-                                                </th>
-                                                <th scope="col"
-                                                    class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
-                                                    ACTION
-                                                </th>
+
+
+
+                {{-- Tailwind dropdown sselect option end --}}
+
+                {{-- Tailwind table start --}}
+                <div class="flex flex-col">
+                    <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
+                        <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                            <div class="overflow-hidden">
+                                <table class="min-w-full">
+                                    <thead class="border-b">
+                                        <tr>
+                                            <th scope="col"
+                                                class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
+                                                #
+                                            </th>
+                                            <th scope="col"
+                                                class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
+                                                STUDENT ID
+                                            </th>
+                                            <th scope="col"
+                                                class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
+                                                STUDENT NAME
+                                            </th>
+                                            <th scope="col"
+                                                class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
+                                                CAMPAS
+                                            </th>
+                                            <th scope="col"
+                                                class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
+                                                Status
+                                            </th>
+                                            <th scope="col"
+                                                class="text-sm font-larg text-gray-900 px-6 py-4 text-left">
+                                                ACTION
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        @foreach ($students as $key => $student)
+                                            <tr class="border-b">
+                                                {{-- create a counter for each student --}}
+                                                <td
+                                                    class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
+                                                    {{ $key + 1 }}
+                                                </td>
+
+                                                <td
+                                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    {{ $student->student_id }}
+                                                </td>
+                                                <td
+                                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    {{ $student->first_name . ' ' . $student->middle_name . ' ' . $student->last_name }}
+                                                </td>
+                                                </td>
+                                                <td
+                                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    {{ $student->campas->name }}
+                                                </td>
+                                                <td
+                                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    {{ $student->id }}
+                                                </td>
+                                                <td
+                                                    class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
+                                                    <div class="inline-flex shadow-md hover:shadow-lg focus:shadow-lg"
+                                                        role="group">
+                                                        <a href="/student/{{ $student->id }}" type="button"
+                                                            class="rounded-l inline-block px-6 py-2.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase hover:bg-green-600 focus:bg-green-600 focus:outline-none focus:ring-0 active:bg-green-700 transition duration-150 ease-in-out">APROVE</a>
+
+                                                        <a type="button"
+                                                            class="rounded-r inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase hover:bg-red-700 focus:bg-red-700 focus:outline-none focus:ring-0 active:bg-red-800 transition duration-150 ease-in-out">DECLINE</a>
+                                                    </div>
+                                                </td>
                                             </tr>
-                                        </thead>
-                                        <tbody>
-
-                                            @foreach ($students as $key => $student)
-                                                <tr class="border-b">
-                                                    {{-- create a counter for each student --}}
-                                                    <td
-                                                        class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                                                        {{ $key + 1 }}
-                                                    </td>
-
-                                                    <td
-                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $student->student_id }}
-                                                    </td>
-                                                    <td
-                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $student->first_name . ' ' . $student->middle_name . ' ' . $student->last_name }}
-                                                    </td>
-                                                    </td>
-                                                    <td
-                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $student->campas->name }}
-                                                    </td>
-                                                    <td
-                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        {{ $student->id }}
-                                                    </td>
-                                                    <td
-                                                        class="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-                                                        <div class="inline-flex shadow-md hover:shadow-lg focus:shadow-lg"
-                                                            role="group">
-                                                            <a href="/student/{{$student->id}}" type="button"
-                                                                class="rounded-l inline-block px-6 py-2.5 bg-green-500 text-white font-medium text-xs leading-tight uppercase hover:bg-green-600 focus:bg-green-600 focus:outline-none focus:ring-0 active:bg-green-700 transition duration-150 ease-in-out">APROVE</a>
-
-                                                            <a type="button"
-                                                                class="rounded-r inline-block px-6 py-2.5 bg-red-600 text-white font-medium text-xs leading-tight uppercase hover:bg-red-700 focus:bg-red-700 focus:outline-none focus:ring-0 active:bg-red-800 transition duration-150 ease-in-out">DECLINE</a>
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
+                                        @endforeach
 
 
 
-                                        </tbody>
-                                    </table>
-                                    <div class="py-6">{{ $students->links() }}</div>
-                                </div>
+                                    </tbody>
+                                </table>
+                                <div class="py-6">{{ $students->links() }}</div>
                             </div>
                         </div>
                     </div>
-                    {{-- Tailwind table end --}}
-
                 </div>
+                {{-- Tailwind table end --}}
+
             </div>
         </div>
+    </div>
     </div>
 </x-app-layout>

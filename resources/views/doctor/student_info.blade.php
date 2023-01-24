@@ -9,9 +9,16 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    {{-- succses messahe start here --}}
+                    @if (session()->has('status'))
+                        <div class="p-4 mb-4 text-lg text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                            role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+                                        {{-- succses messahe start here --}}
 
-
-                    <div class="w-full mx-2 h-64 ">
+                    <div class="w-full mx-2 ">
                         <!-- Profile tab -->
                         <!-- About Section -->
                         <div class="bg-white p-3 shadow-sm rounded-sm">
@@ -68,11 +75,13 @@
                     {{-- @foreach ($histories as $history) --}}
                     <div class="flex flex-col">
                         <div class="overflow-x-auto sm:mx-0.5 lg:mx-0.5">
-                            <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
-                                <h3 class="font-medium leading-tight text-2xl mt-0 mb-2 text-blue-600">
-                                    Medication History
-                                </h3>
-                                <div class="overflow-hidden">
+
+                            <div class="overflow-hidden">
+                                <div class="py-2 inline-block min-w-full sm:px-6 lg:px-8">
+                                    <br>
+                                    <h3 class="font-medium leading-tight text-2xl mt-0 mb-2 text-blue-600">
+                                        Medication History
+                                    </h3>
                                     <table class="min-w-full">
                                         <thead class="bg-white border-b">
                                             <tr>
@@ -155,38 +164,68 @@
 
                                     </tbody>
                                 </table>
-                            </div>
+                            </div v>
                         </div>
                     </div>
                     {{-- @endforeach --}}
                     {{-- medication history table end --}}
 
                     {{-- lab report create start --}}
-                    <form method="POST" class="p-7" action="/doctor/detail/{{ $student->id }}">
-                        @csrf
-                        <div class="mb-6">
-                            <label class="block mb-2 text-sm font-medium text-gray-900  ">Lab
-                                Title</label>
-                            <input type="titel" name="title"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
-                        </div>
-                        @error('title')
-                            <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
-                                <p>{{ $message }}.</p>
+                    <div>
+                        <form method="POST" class="p-7" action="/doctor/detail/{{ $student->id }}">
+                            @csrf
+                            <h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-blue-600"> Lab Request Form</h5>
+                            <div class="mb-6">
+                                <label class="block mb-2 text-sm font-medium text-gray-900  ">Lab Title</label>
+                                <input type="titel" name="title"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
                             </div>
-                        @enderror
-                        <div class="mb-6">
-                            <label class="block mb-2 text-sm font-medium text-gray-900  "> Lab
-                                Description</label>
-                            <textarea name="description"
-                                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                rows="5">
-                            </textarea>
-                        </div>
-                        <button type="submit"
-                            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Submit</button>
-                    </form>
-                    {{-- lab report create end --}}
+                            @error('title')
+                                <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
+                                    <p>{{ $message }}.</p>
+                                </div>
+                            @enderror
+                            <div class="mb-6">
+                                <label class="block mb-2 text-sm font-medium text-gray-900  "> Lab
+                                    Description</label>
+                                <textarea name="description"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    rows="5">
+                                </textarea>
+                            </div>
+                            <button type="submit"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Submit Lab Request</button>
+                        </form>
+                        {{-- lab report create end --}}
+                    </div>
+                    {{-- medt create end --}}
+                    <div>
+                        <form method="POST" class="p-7" action="/doctor/detail/{{ $student->id }}">
+                            @csrf
+                            <h5 class="font-medium leading-tight text-xl mt-0 mb-2 text-blue-600">Previous med </h5>
+                            <div class="mb-6">
+                                <label class="block mb-2 text-sm font-medium text-gray-900  ">Lab Title</label>
+                                <input type="titel" name="title"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                            </div>
+                            @error('title')
+                                <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4" role="alert">
+                                    <p>{{ $message }}.</p>
+                                </div>
+                            @enderror
+                            <div class="mb-6">
+                                <label class="block mb-2 text-sm font-medium text-gray-900  "> Lab
+                                    Description</label>
+                                <textarea name="description"
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                    rows="5">
+                                </textarea>
+                            </div>
+                            <button type="submit"
+                                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Submit Lab Request</button>
+                        </form>
+                        {{-- med histry form end --}}
+                    </div>
                     <div>
                         <button type="submit"
                             class="text-white text-4xl justify-center align-middle bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-9xl rounded-lg w-full sm:w-auto px-5 py-2.5 text-center ">Submit</button>

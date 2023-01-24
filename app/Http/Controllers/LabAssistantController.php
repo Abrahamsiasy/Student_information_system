@@ -83,10 +83,10 @@ class LabAssistantController extends Controller
         $labque = Labqueues::find($labqueue);
         $labque->each->delete();
         //after the labque is delted the it needs to create main que back to the doctor get doector id from lab report and put it back
-        
+
         //Labreport::create($formField);
         //redirect to view lab
-        return redirect()->route('lab');
+        return redirect('/lab')->with('status', 'Lab Result submited to the doctor');
 
     }
 }
