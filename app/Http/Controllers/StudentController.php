@@ -7,6 +7,7 @@ use App\Http\Requests\UpdateStudentRequest;
 use App\Models\Campas;
 use App\Models\Queue;
 use App\Models\Student;
+use GuzzleHttp\Psr7\Request;
 
 class StudentController extends Controller
 {
@@ -21,7 +22,17 @@ class StudentController extends Controller
 
         return view('student.index', [
             'students' => Student::paginate(50),
-            'campas' => Campas::all()
+             'campas' => Campas::all()
+        ]);
+    }
+
+    public function filterCampas()
+    {
+        //return  Hash::make(123456789);
+
+        return view('student.filter', [
+            'students' => Student::latest()->filter(request(['camp']))->paginate(50),
+             'campas' => Campas::all()
         ]);
     }
 

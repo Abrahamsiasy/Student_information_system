@@ -37,8 +37,9 @@ Route::middleware('auth')->group(function () {
 Route::controller(StudentController::class)->group(
     function () {
         Route::get('student', 'index');
+        Route::get('s', 'filterCampas');
         //add student to que and
-        Route::get('student/{student}', 'show');
+        //Route::get('student/{student}', 'show');
     }
 );
 //queue index routes

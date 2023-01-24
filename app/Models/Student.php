@@ -21,6 +21,13 @@ class Student extends Model
         return $this->belongsTo(Campas::class);
     }
 
+    public function scopeFilter($query, array $filters) {
+        if ($filters['camp'] ?? false ) {
+            $query->where('campas_id', 'like', '%' . request('camp') . '%');
+        }
+
+    }
+
 
 
 

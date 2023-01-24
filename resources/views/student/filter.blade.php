@@ -15,13 +15,13 @@
                     <form method="" class="py-4">
 
                         <div class="flex">
-                            <select
+                            <div
                                 class="min-w-10    font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-l-lg hover:bg-gray-200">
                                 {{-- fetch catagories --}}
                                 @foreach ($campas as $camp)
-                                    <option value="/?tag={{$camp->id}}" class="">{{ $camp->name }} </option>
+                                    <a href="/s/?camp={{$camp->id}}" class="block">{{ $camp->name }} </a>
                                 @endforeach
-                            </select>
+                            </div>
                             <div class="relative w-full">
                                 <input type="search" id="search-dropdown"
                                     class="block p-2.5 w-full z-20 text-sm text-gray-900 bg-gray-50 rounded-r-lg border-l-gray-50 border-l-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-l-gray-700  dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:border-blue-500"
@@ -40,16 +40,7 @@
                     </form>
 
                     {{-- to be delted end --}}
-                    {{-- Tailwind dropdown sselect option start --}}
-                    <select name="catagory_id" id="catagory_id"
-                        class="form-select appearance-none block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding bg-no-repeat border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        aria-label="Default select example">
 
-                        {{-- fetch catagories --}}
-                        @foreach ($campas as $camp)
-                            <option value="{{ $camp->id }}">{{ $camp->name }}</option>
-                        @endforeach
-                    </select>
 
 
 
